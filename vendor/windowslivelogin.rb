@@ -23,7 +23,8 @@
 require 'cgi'
 require 'uri'
 require 'base64'
-require 'openssl'
+require 'digest/sha2'
+require 'hmac-sha2'
 require 'net/https'
 require 'rexml/document'
 
@@ -870,8 +871,7 @@ class WindowsLiveLogin
       fatal("Error: signToken: Secret key was not set. Aborting.")
     end
     begin
-      digest = OpenSSL::Digest::SHA256.new
-      return OpenSSL::HMAC.digest(digest, signkey, token)
+      return HMAC::SHA256.digest(signkey, token)
     rescue Exception => e
       debug("Error: signToken: Signing failed: #{token}, #{e}")
       return
@@ -1077,7 +1077,7 @@ class WindowsLiveLogin
     begin
       fatal("Nil/empty secret.") if (secret.nil? or secret.empty?)
       key = prefix + secret
-      key = OpenSSL::Digest::SHA256.digest(key)
+      key = Digest::SHA256.digest(key)
       return key[0..15]
     rescue Exception => e
       debug("Error: derive: #{e}")

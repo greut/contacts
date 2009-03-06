@@ -29,6 +29,9 @@ require 'net/https'
 require 'rexml/document'
 
 class WindowsLiveLogin
+  # Raised when user denies permission and windows live returns with a
+  # post body having action=cancel (instead of action=delauth)
+  class PermissionDenied < StandardError; end
 
   #####################################################################
   # Stub implementation for logging errors. If you want to enable
@@ -716,7 +719,9 @@ class WindowsLiveLogin
       return
     end
     action = query['action']
-    unless action == 'delauth'
+    if action == 'cancel'
+      raise WindowsLiveLogin::PermissionDenied, 'Permission denied by end user'
+    elsif action != 'delauth'
       debug("Warning: processConsent: query action ignored: #{action}.")
       return
     end

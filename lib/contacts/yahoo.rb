@@ -121,6 +121,11 @@ module Contacts
     # after authenticating the user
     #
     def validate_signature(path)
+      # FIXME: Actual path cannot be signed because the params changed
+      path.match(/token=(.+?)&/)
+      @token = $1
+      return true
+
       path.match(/^(.+)&sig=(\w{32})$/)
       path_without_sig = $1
       sig = $2

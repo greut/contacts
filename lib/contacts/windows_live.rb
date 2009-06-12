@@ -70,9 +70,11 @@ module Contacts
     # generates that URL. The user must access that URL, and after he has done
     # authentication, hi will be redirected to your application.
     #
-    def get_authentication_url
+    def authentication_url
       @wll.getConsentUrl("Contacts.Invite")
     end
+
+    alias_method :get_authentication_url, :authentication_url
     
     # After the user has been authenticaded, Windows Live Delegated Authencation
     # Service redirects to your application, through a POST HTTP method. Along

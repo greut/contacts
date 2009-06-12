@@ -80,7 +80,7 @@ module Contacts
     # generates that URL. The user must access that URL, and after he has done
     # authentication, hi will be redirected to your application.
     #
-    def get_authentication_url
+    def authentication_url
       path = AUTH_PATH.clone
       path.sub!(/#appid/, @appid)
 
@@ -90,6 +90,8 @@ module Contacts
       signature = MD5.hexdigest(path + @secret)
       return AUTH_DOMAIN + "#{path}&sig=#{signature}"
     end
+
+    alias_method :get_authentication_url, :authentication_url
 
     # This method return the user's contacts inside an Array in the following
     # format:

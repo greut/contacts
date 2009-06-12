@@ -1,3 +1,8 @@
+google_oauth:
+  consumer_key: yoan.dosimple.ch
+  consumer_secret: e9trKcj7bLG5/+LvfJt9/TGZ
+  callback: http://yoan.dosimple.ch/
+
 windows_live:
   appid: your_app_id
   secret: your_app_secret_key

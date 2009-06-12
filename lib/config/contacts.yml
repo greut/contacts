@@ -1,3 +1,8 @@
+google_oauth:
+  consumer_key: your_consumer_key
+  consumer_secret: your_consumer_secret
+  callback: http://yoursever.com/your_return_url
+
 windows_live:
   appid: your_app_id
   secret: your_app_secret_key

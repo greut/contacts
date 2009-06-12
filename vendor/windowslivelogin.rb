@@ -721,9 +721,9 @@ class WindowsLiveLogin
     action = query['action']
     if action == 'cancel'
       raise WindowsLiveLogin::PermissionDenied, 'Permission denied by end user'
-    elsif action != 'delauth'
-      debug("Warning: processConsent: query action ignored: #{action}.")
-      return
+    #elsif action != 'delauth'
+    #  debug("Warning: processConsent: query action ignored: #{action}.")
+    #  return
     end
     responsecode = query['ResponseCode']
     unless responsecode == 'RequestApproved'
